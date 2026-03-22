@@ -1,10 +1,11 @@
 local CurrentPage = PageNames[props["page_index"].Value]
+  
+local h1 = 20                 --Height of text elements
+local h2 = 32                 --Height of control buttons
+local w1 = 280                --Width of group boxes
+local fs1 = 12                --FontSize of text elements
 
-local h1 = 20
-local h2 = 32
-local w1 = 280
-local fs1 = 12
-
+--Calculate preset gropup box size and save button offset
 local NumPresets = props["Num Presets"].Value
 local NumPresetRows = math.floor((NumPresets - 1) / 8) + 1
 
@@ -14,6 +15,7 @@ if props["Preset Hold Save"].Value == false then
 end
 
 local PresetSaveOffset = (h2 * NumPresetRows) + 8
+
 
 
 if CurrentPage == "Main" then
@@ -49,7 +51,6 @@ if CurrentPage == "Main" then
     Position = {0, 40},
     Size = {w1, 62}
   })
-
   table.insert(graphics,{
     Type = "GroupBox",
     Text = "PTZ",
@@ -61,19 +62,6 @@ if CurrentPage == "Main" then
     CornerRadius = 8,
     Position = {0, 114},
     Size = {w1, 104}
-  })
-
-  table.insert(graphics,{
-    Type = "GroupBox",
-    Text = "Tracking",
-    FontSize = fs1,
-    HTextAlign = "Left",
-    Fill = Palette.White,
-    StrokeColor = Palette.Black,
-    StrokeWidth = 1,
-    CornerRadius = 8,
-    Position = {290, 114},
-    Size = {150, 140}
   })
 
   if NumPresets > 0 then
@@ -91,31 +79,27 @@ if CurrentPage == "Main" then
     })
   end
 
-
   -- Connection -------------------------------------------------------------
   layout["system_online"] = {
     PrettyName = "System~Online",
     Style = "Indicator",
-    Color = {0,255,0},
-    OffColor = {64,0,0},
+    Color = {0, 255, 0},
+    OffColor = {64, 0, 0},
     UnlinkOffColor = true,
     StrokeWidth = 1,
     Margin = 4,
-    Position = {75,40},
-    Size = {h1,h1}
+    Position = {75, 40},
+    Size = {h1, h1}
   }
-
   if props["Connection"].Value == "UDP" or props["Connection"].Value == "TCP" then
-
     table.insert(graphics,{
       Type = "Text",
       Text = "IP Address",
       FontSize = fs1,
       HTextAlign = "Right",
-      Position = {15,74},
-      Size = {62,h1}
+      Position = {15, 74},
+      Size = {62, h1}
     })
-
     layout["system_ip_address"] = {
       PrettyName = "System~IP Address",
       Style = "Text",
@@ -124,18 +108,17 @@ if CurrentPage == "Main" then
       Padding = 2,
       StrokeWidth = 1,
       Position = {79,74},
-      Size = {100,h1}
+      Size = {100, h1}
     }
-
+    
     table.insert(graphics,{
       Type = "Text",
       Text = "Port",
       FontSize = fs1,
       HTextAlign = "Right",
-      Position = {184,74},
-      Size = {33,h1}
+      Position = {184, 74},
+      Size = {33, h1}
     })
-
     layout["system_ip_port"] = {
       PrettyName = "System~IP Port",
       Style = "Text",
@@ -146,22 +129,18 @@ if CurrentPage == "Main" then
       HTextAlign = "Center",
       Padding = 2,
       StrokeWidth = 1,
-      Position = {219,74},
-      Size = {44,h1}
+      Position = {219, 74},
+      Size = {44, h1}
     }
-
   end
-
-
   table.insert(graphics,{
     Type = "Text",
     Text = "ID",
     FontSize = fs1,
     HTextAlign = "Right",
-    Position = {184,54},
-    Size = {33,h1}
+    Position = {184, 54},
+    Size = {33, h1}
   })
-
   layout["setup_camera_id"] = {
     PrettyName = "Camera-ID",
     Style = "Text",
@@ -172,32 +151,26 @@ if CurrentPage == "Main" then
     HTextAlign = "Center",
     Padding = 2,
     StrokeWidth = 1,
-    Position = {219,54},
-    Size = {44,h1}
+    Position = {219, 54},
+    Size = {44, h1}
   }
-
-
   -- PTZ --------------------------------------------------------------------
-
   table.insert(graphics,{
     Type = "Text",
     Text = "Speed",
     FontSize = fs1,
     HTextAlign = "Center",
-    Position = {34,137},
-    Size = {47,20}
+    Position = {34, 137},
+    Size = {47, 20}
   })
-
   table.insert(graphics,{
     Type = "Text",
     Text = "P\nT\nZ",
     FontSize = 15,
     HTextAlign = "Center",
-    Position = {17,153},
-    Size = {17,54}
+    Position = {17, 153},
+    Size = {17, 54}
   })
-
-
   layout["setup_pan_speed"] = {
     PrettyName = "Pan-Tilt-Zoom~Pan Speed",
     Style = "Text",
@@ -205,10 +178,9 @@ if CurrentPage == "Main" then
     HTextAlign = "Center",
     Padding = 2,
     StrokeWidth = 1,
-    Position = {37,155},
-    Size = {44,18}
+    Position = {37, 155},
+    Size = {44, 18}
   }
-
   layout["setup_tilt_speed"] = {
     PrettyName = "Pan-Tilt-Zoom~Tilt Speed",
     Style = "Text",
@@ -216,10 +188,9 @@ if CurrentPage == "Main" then
     HTextAlign = "Center",
     Padding = 2,
     StrokeWidth = 1,
-    Position = {37,173},
-    Size = {44,18}
+    Position = {37, 173},
+    Size = {44, 18}
   }
-
   layout["setup_zoom_speed"] = {
     PrettyName = "Pan-Tilt-Zoom~Zoom Speed",
     Style = "Text",
@@ -227,10 +198,9 @@ if CurrentPage == "Main" then
     HTextAlign = "Center",
     Padding = 2,
     StrokeWidth = 1,
-    Position = {37,191},
-    Size = {44,18}
+    Position = {37, 191},
+    Size = {44, 18}
   }
-
 
   layout["preset_home_load"] = {
     PrettyName = "Pan-Tilt-Zoom~Home",
@@ -238,201 +208,133 @@ if CurrentPage == "Main" then
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {139,150},
-    Size = {h2,h2},
-  }
-
-
+    Position = {139, 150},
+    Size = {h2, h2},
+  }    
   layout["tilt_up"] = {
     PrettyName = "Pan-Tilt-Zoom~Tilt Up",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {139,118},
-    Size = {h2,h2},
-  }
-
+    Position = {139, 118},
+    Size = {h2, h2},
+  }    
   layout["tilt_down"] = {
     PrettyName = "Pan-Tilt-Zoom~Tilt Down",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {139,182},
-    Size = {h2,h2},
-  }
-
+    Position = {139, 182},
+    Size = {h2, h2},
+  }    
   layout["pan_left"] = {
     PrettyName = "Pan-Tilt-Zoom~Pan Left",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {107,150},
-    Size = {h2,h2},
-  }
-
+    Position = {107, 150},
+    Size = {h2, h2},
+  }    
   layout["pan_right"] = {
     PrettyName = "Pan-Tilt-Zoom~Pan Right",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {171,150},
-    Size = {h2,h2},
-  }
-
+    Position = {171, 150},
+    Size = {h2, h2},
+  }    
   layout["pan_right_tilt_up"] = {
     PrettyName = "Pan-Tilt-Zoom~Pan Right / Tilt Up",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {171,118},
-    Size = {h2,h2},
-  }
-
+    Position = {171, 118},
+    Size = {h2, h2},
+  }    
   layout["pan_right_tilt_down"] = {
     PrettyName = "Pan-Tilt-Zoom~Pan Right / Tilt Down",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {171,182},
-    Size = {h2,h2},
-  }
-
+    Position = {171, 182},
+    Size = {h2, h2},
+  }    
   layout["pan_left_tilt_down"] = {
     PrettyName = "Pan-Tilt-Zoom~Pan Left / Tilt Down",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {107,182},
-    Size = {h2,h2},
-  }
-
+    Position = {107, 182},
+    Size = {h2, h2},
+  }    
   layout["pan_left_tilt_up"] = {
     PrettyName = "Pan-Tilt-Zoom~Pan Left / Tilt Up",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {107,118},
-    Size = {h2,h2},
+    Position = {107, 118},
+    Size = {h2, h2},
   }
-
   layout["zoom_in"] = {
     PrettyName = "Pan-Tilt-Zoom~Zoom In",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {203,133},
-    Size = {h2,h2},
-  }
-
+    Position = {203, 133},
+    Size = {h2, h2},
+  }    
   layout["zoom_out"] = {
     PrettyName = "Pan-Tilt-Zoom~Zoom Out",
+    Legend = "",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {203,165},
-    Size = {h2,h2},
-  }
-
-
-  -- Tracking Buttons -------------------------------------------------------
-
+    Position = {203, 165},
+    Size = {h2, h2},
+  }   
   layout["tracking_on"] = {
     PrettyName = "Tracking~On",
     Legend = "Track\nOn",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {300,130},
-    Size = {h2,h2},
-  }
-
+    Position = {235, 133},
+    Size = {h2, h2},
+  }    
   layout["tracking_off"] = {
     PrettyName = "Tracking~Off",
     Legend = "Track\nOff",
     Style = "Button",
     Color = Palette.es_blue,
     Margin = 4,
-    Position = {334,130},
-    Size = {h2,h2},
-  }
-
-  layout["tracking_figure_full"] = {
-    PrettyName = "Tracking~Figure Full",
-    Legend = "Full",
-    Style = "Button",
-    Color = Palette.es_blue,
-    Margin = 4,
-    Position = {300,170},
-    Size = {h2,h2},
-  }
-
-  layout["tracking_figure_half_body"] = {
-    PrettyName = "Tracking~Figure Half",
-    Legend = "Half",
-    Style = "Button",
-    Color = Palette.es_blue,
-    Margin = 4,
-    Position = {334,170},
-    Size = {h2,h2},
-  }
-
-  layout["tracking_figure_close_up"] = {
-    PrettyName = "Tracking~Figure Close",
-    Legend = "Close",
-    Style = "Button",
-    Color = Palette.es_blue,
-    Margin = 4,
-    Position = {368,170},
-    Size = {h2,h2},
-  }
-
-  layout["tracking_place_left"] = {
-    PrettyName = "Tracking~Place Left",
-    Legend = "Left",
-    Style = "Button",
-    Color = Palette.es_blue,
-    Margin = 4,
-    Position = {300,210},
-    Size = {h2,h2},
-  }
-
-  layout["tracking_place_center"] = {
-    PrettyName = "Tracking~Place Center",
-    Legend = "Center",
-    Style = "Button",
-    Color = Palette.es_blue,
-    Margin = 4,
-    Position = {334,210},
-    Size = {h2,h2},
-  }
-
-  layout["tracking_place_right"] = {
-    PrettyName = "Tracking~Place Right",
-    Legend = "Right",
-    Style = "Button",
-    Color = Palette.es_blue,
-    Margin = 4,
-    Position = {368,210},
-    Size = {h2,h2},
-  }
-
+    Position = {235, 165},
+    Size = {h2, h2},
+  }    
 
   -- Presets ----------------------------------------------------------------
-
+  
   layout["preset_saved"] = {
-    PrettyName = "Preset~Preset Saved",
-    Style = "Indicator",
-    Color = {255,0,0},
-    OffColor = {16,0,0},
-    UnlinkOffColor = true,
-    StrokeWidth = 1,
-    Margin = 4,
-    Position = {55,225},
-    Size = {h1,h1}
+  PrettyName = "Preset~Preset Saved",
+  Style = "Indicator",
+  Color = {255, 0, 0},
+  OffColor = {16, 0, 0},
+  UnlinkOffColor = true,
+  StrokeWidth = 1,
+  Margin = 4,
+  Position = {55, 225},
+  Size = {h1, h1}
   }
 
   for pst = 0, NumPresets - 1 do
-
     local row = 1 + math.floor(pst / 8)
     local col = 1 + (pst % 8)
 
@@ -444,11 +346,10 @@ if CurrentPage == "Main" then
       Legend = "P" .. (pst),
       Position = {11 + (h2 * (col - 1)),
                   246 + (h2 * (row - 1))},
-      Size = {h2,h2}
+      Size = {h2, h2}
     }
 
     if props["Preset Hold Save"].Value == false then
-
       layout["preset_save_" .. string.format("%03d",pst)] = {
         PrettyName = "Preset~Save P" .. string.format("%03d", pst),
         Style = "Button",
@@ -457,11 +358,9 @@ if CurrentPage == "Main" then
         Legend = "P" .. (pst),
         Position = {11 + (h2 * (col - 1)),
                     246 + PresetSaveOffset + (h2 * (row - 1))},
-        Size = {h2,h2}
+        Size = {h2, h2}
       }
-
     end
-
   end
 
 end
