@@ -272,24 +272,24 @@ function PTZ_Control(func)
 
   -- Figure Size
 
-  elseif func == "figure_size_full" then
+  elseif func == "tracking_figure_full" then
     VISCA("Cmd", string.char(ID,0x0A,0x0F,0x01,0x00,0x00,0xff))
 
-  elseif func == "figure_size_half" then
+  elseif func == "tracking_figure_half_body" then
     VISCA("Cmd", string.char(ID,0x0A,0x0F,0x01,0x00,0x01,0xff))
 
-  elseif func == "figure_size_close" then
+  elseif func == "tracking_figure_close_up" then
     VISCA("Cmd", string.char(ID,0x0A,0x0F,0x01,0x00,0x02,0xff))
 
   -- Placement
 
-  elseif func == "placement_left" then
+  elseif func == "tracking_place_left" then
     VISCA("Cmd", string.char(ID,0x0A,0x0F,0x01,0x07,0x00,0xff))
 
-  elseif func == "placement_center" then
+  elseif func == "tracking_place_center" then
     VISCA("Cmd", string.char(ID,0x0A,0x0F,0x01,0x07,0x01,0xff))
 
-  elseif func == "placement_right" then
+  elseif func == "tracking_place_right" then
     VISCA("Cmd", string.char(ID,0x0A,0x0F,0x01,0x07,0x02,0xff))
   end
 end
@@ -298,7 +298,7 @@ end
 -- Event Handlers
 
 for key, val in pairs(Controls) do
-
+ 
   if string.sub(key, -6, -1) == "_speed" then
 
     val.EventHandler = function()
@@ -312,9 +312,10 @@ for key, val in pairs(Controls) do
   elseif string.sub(key, 1, 4) == "pan_" or
          string.sub(key, 1, 5) == "tilt_" or
          string.sub(key, 1, 5) == "zoom_" or
+         string.sub(key, 1, 16) == "tracking_figure_" or
+         string.sub(key, 1, 15) == "tracking_place_" or
          string.sub(key, 1, 9) == "tracking_" or
-         string.sub(key, 1, 12) == "figure_size_" or
-         string.sub(key, 1, 10) == "placement_" or
+
          key == "preset_home_load" then
 
     val.EventHandler = function(ctl)
